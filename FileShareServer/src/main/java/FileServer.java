@@ -26,7 +26,7 @@ public class FileServer {
     }
     public static void main(String[] args) {
         System.out.println("Test");
-        int port = 8080;
+        int port = 1234;
         // port to listen default 8080, or the port from the argument
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);

@@ -12,6 +12,8 @@ public class ConnectionHandler implements Runnable {
         this.socket = socket;
         requestInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         responseOutput = new DataOutputStream(socket.getOutputStream());
+        ObjectOutputStream objOS = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream objIS = new ObjectInputStream(socket.getInputStream());
     }
 
     public void run() {
@@ -39,9 +41,9 @@ public class ConnectionHandler implements Runnable {
             String command = tokenizer.nextToken();
             String uri = tokenizer.nextToken();
 
-            if (command.equalsIgnoreCase("GET") || command.equalsIgnoreCase("POST")) {
+            if (command.equalsIgnoreCase("GET")) {
                 File baseDir = new File("shareDir");
-                sendFile(baseDir, uri);
+                sendFiles(baseDir, uri);
             } else {
                 sendError(405, "Method Not Allowed", "You cannot use the '" + command + "' command on this server.");
             }
@@ -52,40 +54,36 @@ public class ConnectionHandler implements Runnable {
 
     }
 
-    private void sendFile(File baseDir, String uri) throws IOException {
-        File file = new File(baseDir, uri);
+    private void sendFiles(File baseDir, String uri) throws IOException {
+        File[] files = new File(baseDir.getAbsolutePath()).listFiles();
 
-        if (!file.exists()) {
-            sendError(404, "Not Found", "The file '" + uri + "' could not be located.");
 
-        } else {
+        BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
+        DataOutputStream dos = new DataOutputStream(bos);
 
-            String contentType = getContentType(file.getName());
-            byte[] content = new byte[(int) file.length()];
-            FileInputStream fileIn = new FileInputStream(file);
-            fileIn.read(content);
-            fileIn.close();
-            sendResponse("HTTP/1.1 200 Ok\r\n", contentType, content);
+        assert files != null;
+        dos.writeInt(files.length);
+
+        for(File file : files)
+        {
+            long length = file.length();
+            dos.writeLong(length);
+
+            String name = file.getName();
+            dos.writeUTF(name);
+
+            FileInputStream fis = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+
+            int theByte = 0;
+            while((theByte = bis.read()) != -1) bos.write(theByte);
+
+            bis.close();
         }
+
+        dos.close();
     }
 
-    private String getContentType(String filename) {
-        if (filename.endsWith(".html") || filename.endsWith(".htm")) {
-            return "text/html";
-        } else if (filename.endsWith(".css")) {
-            return "text/css";
-        } else if (filename.endsWith(".js")) {
-            return "text/javascript";
-        } else if (filename.endsWith(".png")) {
-            return "image/png";
-        } else if (filename.endsWith(".gif")) {
-            return "image/gif";
-        } else if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
-            return "image/jpeg";
-        } else {
-            return "unknown";
-        }
-    }
 
     private void sendResponse(String responseCode, String contentType, byte[] content) throws IOException {
         responseOutput.writeBytes(responseCode);

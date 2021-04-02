@@ -12,7 +12,7 @@ javafx {
 }
 dependencies {
 }
-mainClassName = 'org.openjfx.MainApp'
+mainClassName = 'FileShare.main/org.openjfx.MainApp'
 jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {

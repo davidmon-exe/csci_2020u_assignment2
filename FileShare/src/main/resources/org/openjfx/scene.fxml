@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="800.0" prefWidth="900"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
 
-   <TableView fx:id="clientList" prefHeight="750.0" prefWidth="390.0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="50">
-      <columns>
-         <TableColumn fx:id="clientCol" prefWidth="390.0" text="Client Directory">
-            <cellValueFactory>
-               <PropertyValueFactory property="clientFiles" />
-            </cellValueFactory>
-         </TableColumn>
-      </columns>
-      <items>
-         <FXCollections fx:factory="observableArrayList">
-         </FXCollections>
-      </items>
-   </TableView>
+   <TreeView id="clientTreeView" fx:id="clientTreeView" editable="true" layoutX="14.0" layoutY="50.0" prefHeight="750.0" prefWidth="390.0" />
 
-   <TableView fx:id="serverList" layoutX="410.0" prefHeight="750.0" prefWidth="390.0" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="50">
-      <columns>
-         <TableColumn fx:id="serverCol" prefWidth="390.0" text="Server Directory">
-            <cellValueFactory>
-               <PropertyValueFactory property="serverFiles" />
-            </cellValueFactory>
-         </TableColumn>
-      </columns>
-      <items>
-         <FXCollections fx:factory="observableArrayList">
-         </FXCollections>
-      </items>
-   </TableView>
-   <Button layoutX="564.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadHandler" text="Download" />
-   <Button layoutX="163.0" layoutY="14.0" mnemonicParsing="false" onAction="#uploadHandler" text="Upload" />
+   <TreeView id="serverTreeView" fx:id="serverTreeView" editable="true" layoutX="496.0" layoutY="50.0" prefHeight="750.0" prefWidth="390.0" />
+
+   <Button layoutX="650.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadHandler" text="Download" />
+   <Button layoutX="177.0" layoutY="14.0" mnemonicParsing="false" onAction="#uploadHandler" text="Upload" />
 
 </AnchorPane>
