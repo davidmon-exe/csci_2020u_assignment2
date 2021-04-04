@@ -5,7 +5,7 @@
 ## Desription:
 * File Share is a system that allows a user to create a file sharing server program, and connect as a client program which can upload or download files to or from the server respectively.
 * FileShareServer is the server, FileShare is the client
-* To Note: download does not work completely. This is a problem to do with the inputstream in FXMLController for the downloadHandler that I was never able to solve with any solution 
+* To Note : download does not work completely. This is a problem to do with the inputstream in FXMLController for the downloadHandler that I was never able to solve with any solution I tried to implement
 
 
 ## How to use:
