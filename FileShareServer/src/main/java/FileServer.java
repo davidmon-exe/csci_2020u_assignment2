@@ -13,6 +13,11 @@ public class FileServer {
         serverSocket = new ServerSocket(port);
         this.port = port;
     }
+
+    /**
+     * Request handler to be able to multithread
+     * @throws IOException
+     */
     public void handleRequests() throws IOException {
         System.out.println("Listening to port: " + port);
 
@@ -25,7 +30,6 @@ public class FileServer {
         }
     }
     public static void main(String[] args) {
-        System.out.println("Test");
         int port = 1234;
         // port to listen default 8080, or the port from the argument
         if (args.length > 0) {

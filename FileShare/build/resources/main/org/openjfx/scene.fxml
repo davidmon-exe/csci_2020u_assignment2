@@ -3,9 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="900"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.FXMLController">
 
    <TreeView id="clientTreeView" fx:id="clientTreeView" editable="true" layoutX="14.0" layoutY="50.0" prefHeight="750.0" prefWidth="390.0" />
 
@@ -13,5 +11,6 @@
 
    <Button layoutX="650.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadHandler" text="Download" />
    <Button layoutX="177.0" layoutY="14.0" mnemonicParsing="false" onAction="#uploadHandler" text="Upload" />
+   <Button layoutX="419.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshHandler" text="Refresh" />
 
 </AnchorPane>
